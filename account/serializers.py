@@ -28,6 +28,17 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255)
+    password = serializers.CharField(max_length=255)
+
+    def validate(self,attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+        if not email:
+            raise serializers.ValidationError('Username cannot be empty')
+        if not password:
+            return serializers.ValidationError("Password cannot be empty")
+
+        return attrs
     class Meta:
         model = User
         fields = ['email', 'password']
