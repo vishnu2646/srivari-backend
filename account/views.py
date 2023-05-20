@@ -35,6 +35,20 @@ def isUserAdmin(request):
     }
     return Response(content)
 
+@api_view(['GET'])
+def admin_user(request):
+    if request.user.is_authenticated and request.user.is_admin:
+        return Response({"admin": True})
+    else:
+        return Response({"admin": False})
+
+@api_view(['GET'])
+def userIsLoggedIn(request):
+    if request.user.is_authenticated:
+        return Response({"LoggedIn": True})
+    else:
+        return Response({"LoggedIn": False})
+
 class UserRegistrationView(APIView):
     renderer_classes = [UserRenderer]
     def post(self, request, format=None):
@@ -110,7 +124,7 @@ def enquiryCreate(request):
     serializer = EnquirySerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response("You Will be contacted soon", status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def enquiryUpdate(request, pk):
