@@ -21,4 +21,5 @@ urlpatterns = [
     path('endoresment-delete/<str:pk>/', views.endoresmentDelete, name='endoresment-delete'),
     path('check-user/', views.isUserAdmin, name='check-user'),
     path('is-admin-user/', views.admin_user, name='is-admin-user'),
+    path('is-user-logged-in/', views.userIsLoggedIn, name='is-user-logged-in'),
 ]
