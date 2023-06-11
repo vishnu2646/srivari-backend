@@ -177,6 +177,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:4200",
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://srivarisuvarnasubikshaahomes.com', 'http://54.221.145.215/', 'https://54.221.145.215/']
+
 MEDIA_URL = '/assets/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'assets/')
