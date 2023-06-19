@@ -130,7 +130,7 @@ class EndoresmentSerializer(serializers.ModelSerializer):
         fields = ('title', 'image')
         
     def get_image_url(self, obj):
-        return os.environ.get('BASE_URL')+ obj.image.url
+        return obj.image.url
     
 class CaroselSerializer(serializers.ModelSerializer):
     img = serializers.ImageField(use_url=True)
@@ -140,7 +140,7 @@ class CaroselSerializer(serializers.ModelSerializer):
         fields = ('img','imagename')
         
     def get_image_url(self, obj):
-        return os.environ.get('BASE_URL')+obj.image.url
+        return obj.image.url
     
 class AboutContentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -165,7 +165,7 @@ class HomePointsSerializer(serializers.ModelSerializer):
         fields = ('icon','description')
         
     def get_image_url(self, obj):
-        return os.environ.get('BASE_URL')+obj.image.url
+        return obj.image.url
     
 class VillaCaroselSerializer(serializers.ModelSerializer):
     images = serializers.ImageField(use_url=True)
@@ -175,4 +175,4 @@ class VillaCaroselSerializer(serializers.ModelSerializer):
         fields = ('images','title')
         
     def get_image_url(self, obj):
-        return os.environ.get('BASE_URL')+obj.image.url
+        return obj.image.url
