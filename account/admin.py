@@ -1,5 +1,5 @@
 from django.contrib import admin
-from account.models import User, Enquiry, Endoresment
+from account.models import AboutBlocks, Carosel, User, Enquiry, Endoresment, Home, HomePoints, AboutContent, VillsCarosel
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class UserModelAdmin(BaseUserAdmin):
@@ -30,3 +30,9 @@ class UserModelAdmin(BaseUserAdmin):
 admin.site.register(User, UserModelAdmin)
 admin.site.register(Enquiry)
 admin.site.register(Endoresment)
+admin.site.register(Carosel)
+admin.site.register(AboutBlocks)
+admin.site.register(AboutContent)
+admin.site.register(Home)
+admin.site.register(HomePoints)
+admin.site.register(VillsCarosel)

@@ -22,4 +22,10 @@ urlpatterns = [
     path('check-user/', views.isUserAdmin, name='check-user'),
     path('is-admin-user/', views.admin_user, name='is-admin-user'),
     path('is-user-logged-in/', views.userIsLoggedIn, name='is-user-logged-in'),
+    path('carosel/', views.caroselView, name='caroselView'),
+    path('villa-carosel/', views.villaCaroselView, name='villaCaroselView'),
+    path('about-content/', views.AboutContents, name='about-content'),
+    path('about-block/', views.AboutBlock, name='about-block'),
+    path('home/', views.HomeView, name='home'),
+    path('home-points/', views.HomePointsView, name='home-points'),
 ]

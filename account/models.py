@@ -87,7 +87,7 @@ class PlotsCarosel(models.Model):
         return self.title
     
 class VillsCarosel(models.Model):
-    images = models.ImageField(upload_to='images/carosel/villa')
+    images = models.ImageField(upload_to='images/carosel/villa/')
     title = models.CharField(max_length=50)
     
     def __str__(self) -> str:
@@ -109,3 +109,35 @@ class Enquiry(models.Model):
     
     def __str__(self) -> str:
         return self.clientname
+    
+class Carosel(models.Model):
+    img = models.ImageField(upload_to='images/carosel/hero/')
+    imagename = models.CharField(max_length=50, blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return self.imagename
+    
+class Home(models.Model):
+    quote = models.CharField(max_length=1000, null=True, blank=True)
+    btnTitle = models.CharField(max_length=50, null=True, blank=True)
+    
+    def __str__(self) -> str:
+        return self.quote
+    
+class HomePoints(models.Model):
+    icon = models.ImageField(upload_to='images/about/')
+    description = models.TextField(blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return self.description
+    
+class AboutBlocks(models.Model):
+    title = models.CharField(max_length=100, blank=True, null=True)
+    points = models.CharField(max_length=50, blank=True, null=True)
+    
+    def __str__(self):
+        return self.title
+    
+class AboutContent(models.Model):
+    content = models.TextField()
+    quote = models.TextField()

@@ -2,16 +2,22 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
-from account.models import Endoresment, Enquiry
+from account.models import AboutBlocks, AboutContent, Carosel, Endoresment, Enquiry, Home, HomePoints, VillsCarosel
 from account.serializers import (
+    AboutBlockSerializer,
+    AboutContentSerializer,
+    CaroselSerializer,
     EndoresmentSerializer,
+    HomePointsSerializer,
+    HomeSerializer,
     SendPasswordResetEmailSerializer,
     UserChangePasswordSerializer,
     UserLoginSerializer,
     UserPasswordResetSerializer,
     UserProfileSerializer,
     UserRegistrationSerializer,
-    EnquirySerializer
+    EnquirySerializer,
+    VillaCaroselSerializer
 )
 from django.contrib.auth import authenticate
 from account.renderers import UserRenderer
@@ -192,3 +198,39 @@ def endoresmentDelete(request, pk):
         return Response({'msg': 'Deleted Successfully'}, status=status.HTTP_200_OK)
     else:
         return Response({'msg': 'You are Not Admin user to Access the data'}, status=status.HTTP_401_UNAUTHORIZED)
+    
+@api_view(['GET'])
+def caroselView(request):
+    carosel = Carosel.objects.all()
+    serializer = CaroselSerializer(carosel, many=True, context={"request": request})
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def AboutContents(request):
+    aboutContent = AboutContent.objects.all()
+    serializer = AboutContentSerializer(aboutContent, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def AboutBlock(request):
+    block = AboutBlocks.objects.all()
+    serializer = AboutBlockSerializer(block, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def HomeView(request):
+    block = Home.objects.all()
+    serializer = HomeSerializer(block, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def HomePointsView(request):
+    points = HomePoints.objects.all()
+    serializer = HomePointsSerializer(points, many=True, context={"request": request})
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def villaCaroselView(request):
+    villaCarosels = VillsCarosel.objects.all()
+    serializer = VillaCaroselSerializer(villaCarosels, many=True, context={"request": request})
+    return Response(serializer.data, status=status.HTTP_200_OK)

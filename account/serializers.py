@@ -1,5 +1,6 @@
+import os
 from rest_framework import serializers
-from account.models import Endoresment, Enquiry, User
+from account.models import AboutBlocks, AboutContent, Carosel, Endoresment, Enquiry, Home, HomePoints, User, VillsCarosel
 from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -77,7 +78,7 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
             print('Encoded UID', uid)
             token = PasswordResetTokenGenerator().make_token(user)
             print('Password Reset Token', token)
-            link = 'http://localhost:3000/api/user/reset/'+uid+'/'+token
+            link = os.environ.get('FRONT_END_BASE_URL')+uid+'/'+token
             print('Password Reset Link', link)
             # Send EMail
             body = 'Click Following Link to Reset Your Password '+link
@@ -129,4 +130,49 @@ class EndoresmentSerializer(serializers.ModelSerializer):
         fields = ('title', 'image')
         
     def get_image_url(self, obj):
-        return 'http://localhost:8000'+ obj.image.url
+        return os.environ.get('BASE_URL')+ obj.image.url
+    
+class CaroselSerializer(serializers.ModelSerializer):
+    img = serializers.ImageField(use_url=True)
+     
+    class Meta:
+        model = Carosel
+        fields = ('img','imagename')
+        
+    def get_image_url(self, obj):
+        return os.environ.get('BASE_URL')+obj.image.url
+    
+class AboutContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutContent
+        fields = '__all__'
+        
+class AboutBlockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutBlocks
+        fields = '__all__'
+        
+class HomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Home
+        fields = '__all__'
+        
+class HomePointsSerializer(serializers.ModelSerializer):
+    icon = serializers.ImageField(use_url=True)
+     
+    class Meta:
+        model = HomePoints
+        fields = ('icon','description')
+        
+    def get_image_url(self, obj):
+        return os.environ.get('BASE_URL')+obj.image.url
+    
+class VillaCaroselSerializer(serializers.ModelSerializer):
+    images = serializers.ImageField(use_url=True)
+     
+    class Meta:
+        model = VillsCarosel
+        fields = ('images','title')
+        
+    def get_image_url(self, obj):
+        return os.environ.get('BASE_URL')+obj.image.url
