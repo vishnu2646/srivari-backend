@@ -159,7 +159,7 @@ def endoresmentList(request):
     isAdmin = isUserAdmin
     if isAdmin:
         endoresment = Endoresment.objects.all()
-        serializer = EndoresmentSerializer(endoresment, many=True, context={"request": request})
+        serializer = EndoresmentSerializer(endoresment, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 @api_view(['GET'])
@@ -202,7 +202,7 @@ def endoresmentDelete(request, pk):
 @api_view(['GET'])
 def caroselView(request):
     carosel = Carosel.objects.all()
-    serializer = CaroselSerializer(carosel, many=True, context={"request": request})
+    serializer = CaroselSerializer(carosel, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
@@ -226,11 +226,11 @@ def HomeView(request):
 @api_view(['GET'])
 def HomePointsView(request):
     points = HomePoints.objects.all()
-    serializer = HomePointsSerializer(points, many=True, context={"request": request})
+    serializer = HomePointsSerializer(points, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def villaCaroselView(request):
     villaCarosels = VillsCarosel.objects.all()
-    serializer = VillaCaroselSerializer(villaCarosels, many=True, context={"request": request})
+    serializer = VillaCaroselSerializer(villaCarosels, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
